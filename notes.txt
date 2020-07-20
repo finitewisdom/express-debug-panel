@@ -1,0 +1,4 @@
+todo
+----
+- factor out necessary .css and .js from bootstrap, so we don't rely on it
+

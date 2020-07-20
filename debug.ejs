@@ -1,0 +1,196 @@
+<%
+    function escapeHtml( s ) {
+
+        var tagsToReplace = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;'
+        };
+
+        return typeof s === "string" ? s.replace( /[&<>]/g, function( tag ) { return tagsToReplace[ tag ] || tag; } ) : s;
+    }
+
+    function formatAsTable( obj, maxDepth, depth ) {
+
+        var s = "";
+
+        if ( obj && ( typeof obj === "object" || typeof obj === "function" ) ) {
+
+            if ( !depth ) { 
+                depth = 1;
+            }
+            
+            if ( !maxDepth ) {
+                maxDepth = 1;
+            }
+
+            if ( depth === 1 && Object.keys( obj ).length === 0 ) {
+                s += "<div style='padding: 1.5rem;'>Object is empty.</div>";
+            } else {
+
+                s += '<table class="table table-striped debug-panel-table">'
+                   + '  <thead class="thead-dark">'
+                   + '    <tr>'
+                   + '      <th class="w-25">Name</th>'
+                   + '      <th>Value</th>'
+                   + '    </tr>'
+                   + '  </thead>'
+                   + '<tbody>';
+
+                Object.keys( obj ).sort().forEach( function( key ) {
+
+                    s += '<tr>'
+                       + '<td style="color: black !important;">' + escapeHtml( key ) + '</td>'
+                       + '<td style="word-break: break-all; color: black !important;">';
+
+                    if ( obj[ key ] && typeof obj[ key ] === "object" ) {
+                        if ( depth <= maxDepth ) {
+                            s += formatAsTable( obj[ key ], maxDepth, depth + 1 );
+                        } else {
+                            s += "(Object)";
+                        }
+                    } else {
+                        s += escapeHtml( obj[ key ] );
+                    }
+
+                    s += '</td>'
+                       + '</tr>';
+                } );
+
+                s += '  </tbody>';
+                s += '</table>';
+            }
+        }
+
+        return s;
+    }
+%>
+
+<!-- htmllint ignore -->
+<style>
+    .table-striped tbody tr:nth-of-type(even) {
+        background-color: white;
+    }
+
+    .debug-panel-table {
+        background-color: #eee;
+    }
+
+    .debug-panel-table th,
+    .debug-panel-table td {
+        border: 1px solid #ccc;
+    }
+
+    .tab-pane {
+        background-color: #eee;
+        color: black !important;
+    }
+</style>
+<!-- htmllint unignore -->
+
+<div class="row mt-3">
+    <div class="col-12">
+
+        <div class="accordion">
+
+            <div class="card">
+
+                <div class="card-header" style="background-color: #F49B1E;" id="debug-panel-heading-one">
+                    <h4 class="header-title">
+                        <a href="#" class="collapsed" style="color: #fff3cd;" data-toggle="collapse" data-target="#debug-panel-collapse-one" aria-expanded="true" aria-controls="debug-panel-collapse-one">
+                            <i class="">↕</i>
+                            Debug Panel
+                        </a>
+                        <!-- htmllint ignore -->
+                        <a href="https://www.finitewisdom.com" target="_blank">
+                            <img class="float-right" src="https://s3.amazonaws.com/scratch.finitewisdom.com/1Color_OwlOnly_128X128.png" width="32" alt="Finite Wisdom logo">
+                        </a>
+                        <!-- htmllint unignore -->
+                    </h4>
+                </div>
+
+                <div id="debug-panel-collapse-one" class="collapse" aria-labelledby="debug-panel-heading-one">
+
+                    <div class="card-body bg-dark text-dark">
+
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="debug-panel-request-tab" data-toggle="tab" href="#debug-panel-request-content" role="tab" aria-controls="debug-panel-request-content" aria-selected="true">Request</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="debug-panel-response-tab" data-toggle="tab" href="#debug-panel-response-content" role="tab" aria-controls="debug-panel-response-content" aria-selected="true">Response</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="debug-panel-headers-tab" data-toggle="tab" href="#debug-panel-headers-content" role="tab" aria-controls="debug-panel-headers-content" aria-selected="true">Headers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="debug-panel-query-tab" data-toggle="tab" href="#debug-panel-query-content" role="tab" aria-controls="debug-panel-query-content" aria-selected="true">Query</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="debug-panel-params-tab" data-toggle="tab" href="#debug-panel-params-content" role="tab" aria-controls="debug-panel-params-content" aria-selected="true">Params</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="debug-panel-cookies-tab" data-toggle="tab" href="#debug-panel-cookies-content" role="tab" aria-controls="debug-panel-cookies-content" aria-selected="true">Cookies</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="debug-panel-process-tab" data-toggle="tab" href="#debug-panel-process-content" role="tab" aria-controls="debug-panel-process-content" aria-selected="true">Process</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="debug-panel-app-tab" data-toggle="tab" href="#debug-panel-app-content" role="tab" aria-controls="debug-panel-app-content" aria-selected="true">App</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="debug-panel-session-tab" data-toggle="tab" href="#debug-panel-session-content" role="tab" aria-controls="debug-panel-session-content" aria-selected="true">Session</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+
+                            <div class="tab-pane fade" id="debug-panel-headers-content" role="tabpanel" aria-labelledby="debug-panel-headers-tab">
+                                <%- formatAsTable( req.headers ) %>
+                            </div>
+
+                            <div class="tab-pane fade" id="debug-panel-query-content" role="tabpanel" aria-labelledby="debug-panel-query-tab">
+                                <%- formatAsTable( req.query ) %>
+                            </div>
+
+                            <div class="tab-pane fade" id="debug-panel-params-content" role="tabpanel" aria-labelledby="debug-panel-params-tab">
+                                <%- formatAsTable( req.params ) %>
+                            </div>
+
+                            <div class="tab-pane fade" id="debug-panel-cookies-content" role="tabpanel" aria-labelledby="debug-panel-cookies-tab">
+                                <%- formatAsTable( req.cookies ) %>
+                            </div>
+
+                            <div class="tab-pane fade" id="debug-panel-app-content" role="tabpanel" aria-labelledby="debug-panel-app-tab">
+                                <% console.log( "req.app" ); %>
+                                <%- formatAsTable( req.app, /* maxDepth */ 3 ) %>
+                            </div>
+
+                            <div class="tab-pane fade" id="debug-panel-session-content" role="tabpanel" aria-labelledby="debug-panel-session-tab">
+                                <%- formatAsTable( req.session, /* maxDepth */ 2 ) %>
+                            </div>
+
+                            <div class="tab-pane fade show active" id="debug-panel-request-content" role="tabpanel" aria-labelledby="debug-panel-request-tab">
+                                <%- formatAsTable( req, /* maxDepth */ 1 ) %>
+                            </div>
+
+                            <div class="tab-pane fade" id="debug-panel-response-content" role="tabpanel" aria-labelledby="debug-panel-response-tab">
+                                <%- formatAsTable( req.res, /* maxDepth */ 1 ) %>
+                            </div>
+
+                            <div class="tab-pane fade" id="debug-panel-process-content" role="tabpanel" aria-labelledby="debug-panel-process-tab">
+                                <%- formatAsTable( process, /* maxDepth */ 2 ) %>
+                            </div>
+
+                        </div> <!-- tab-content -->
+
+                    </div> <!-- card-body -->
+
+                </div> <!-- collapse -->
+
+            </div> <!-- card -->
+
+        </div> <!-- accordion -->
+
+    </div> <!-- col-12 -->
+</div> <!-- row -->

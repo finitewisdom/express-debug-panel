@@ -1,0 +1,15 @@
+{
+  "name": "express-debug-panel",
+  "version": "1.0.0",
+  "description": "A panel containing useful debugging information, for use in Express.js applications",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Joshua Golub <j@wiz4.us>",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.3"
+  }
+}
