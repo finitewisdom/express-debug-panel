@@ -1,6 +1,6 @@
 {
   "name": "express-debug-panel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A panel containing useful debugging information, for use in Express.js applications",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,7 @@
   "author": "Joshua Golub <j@wiz4.us>",
   "license": "ISC",
   "dependencies": {
+    "config": "^3.3.1",
     "ejs": "^3.1.3"
   }
 }

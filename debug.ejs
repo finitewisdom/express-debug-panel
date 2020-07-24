@@ -25,13 +25,13 @@
             }
 
             if ( depth === 1 && Object.keys( obj ).length === 0 ) {
-                s += "<div style='padding: 1.5rem;'>Object is empty.</div>";
+                s += "<div class='debug-panel-empty'>Object is empty.</div>";
             } else {
 
-                s += '<table class="table table-striped debug-panel-table">'
-                   + '  <thead class="thead-dark">'
+                s += '<table class="debug-panel-table">'
+                   + '  <thead>'
                    + '    <tr>'
-                   + '      <th class="w-25">Name</th>'
+                   + '      <th class="debug-panel-table-header-name">Name</th>'
                    + '      <th>Value</th>'
                    + '    </tr>'
                    + '  </thead>'
@@ -44,7 +44,7 @@
                        + '<td style="word-break: break-all; color: black !important;">';
 
                     if ( obj[ key ] && typeof obj[ key ] === "object" ) {
-                        if ( depth <= maxDepth ) {
+                        if ( depth < maxDepth ) {
                             s += formatAsTable( obj[ key ], maxDepth, depth + 1 );
                         } else {
                             s += "(Object)";
@@ -64,133 +64,248 @@
 
         return s;
     }
+
 %>
 
-<!-- htmllint ignore -->
 <style>
-    .table-striped tbody tr:nth-of-type(even) {
-        background-color: white;
+
+    .debug-panel,
+    .debug-panel * {
+        box-sizing: border-box;        
+    }
+
+    .debug-panel {
+        background: #303030;
+        font-family: "Trebuchet MS", sans-serif;
+        font-size: 13px;
+        line-height: 1.15;
+        width: 100%;
+    }
+
+    .debug-panel-show-label {
+        background-color: #F49B1E;
+        color: rgba(255,255,255,.85);
+        cursor: pointer;
+        display: block;
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 0;
+        padding: 16px 28px;
+        width: 100%;
+    }
+
+    .debug-panel-show-label img {
+        float: right;
+    }
+
+    .debug-panel-show {
+        display: none;
+    }
+
+    .debug-panel-show + .debug-panel-tabs {
+        display: none;
+    }
+
+    .debug-panel-show:checked + .debug-panel-tabs {
+        display: block;
+    }
+
+    .debug-panel-empty {
+        padding: 20px;
+        background-color: #eee;
+    }
+
+    .debug-panel-tabs{
+        background: #303030;
+        border-bottom: 2px solid rgba(255,255,255,0.08);
+        display: block;
+        margin: 24px 0px;
+        min-height: 50px;
+        padding-left: 25px;
+        position: relative;
+        width: 100%;
+    }
+
+    .debug-panel-tabs .debug-panel-tab {
+        display: block;
+        float: left;
+    }
+
+    .debug-panel-tabs .debug-panel-tab > input[type="radio"] {
+        display: none;
+    }
+
+    .debug-panel-tabs .debug-panel-tab>label {
+        background: #303030;
+        border-bottom: 2px solid rgba(255,255,255,0.08);
+        color: rgba(255,255,255,.5);
+        cursor: pointer;
+        display: block;
+        font-size: 15px;
+        padding: 15px 21px;
+        position: relative;
+    }
+
+    .debug-panel-tabs .debug-panel-tab-content {
+        background: #303030;
+        color: black;
+        display: none;
+        left: 0;
+        margin-bottom: 32px;
+        overflow: hidden;
+        padding: 25px;
+        position: absolute;
+        top: 50px;
+        transition: display 400ms ease-out;
+        width: 100%;
+        z-index: 0; /* or display: none; */
+    }
+
+    .debug-panel-tabs>.debug-panel-tab>[id^="debug-panel-tab"]:checked + label {
+        border-bottom: 2px solid white;
+        color: white;
+        top: 0;
+    }
+
+    .debug-panel-tabs > .debug-panel-tab > [id^="debug-panel-tab"]:checked ~ [id^="debug-panel-tab-content"] {
+        display: block;
+        transition: display 400ms ease-out;
+        z-index: 1; /* or display: block; */
     }
 
     .debug-panel-table {
         background-color: #eee;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .debug-panel-table tbody tr:nth-of-type(even) {
+        background-color: white;
     }
 
     .debug-panel-table th,
     .debug-panel-table td {
         border: 1px solid #ccc;
+        padding: 13px 20px 13px 20px;
     }
 
-    .tab-pane {
-        background-color: #eee;
-        color: black !important;
+    .debug-panel-table th {
+        background-color: rgba(0,0,0,.4);
+        border-color: rgba(255,255,255,.06);
+        color: #fff;
     }
+
+    .debug-panel-table-header-name {
+        width: 25%;
+    }
+
 </style>
-<!-- htmllint unignore -->
 
-<div class="row mt-3">
-    <div class="col-12">
+<div class="debug-panel">
 
-        <div class="accordion">
+    <label class="debug-panel-show-label" for="debug-panel-show">
+        ↧ Debug Panel
+        <a href="https://www.finitewisdom.com" target="_blank">
+            <img src="https://s3.amazonaws.com/cdn.finitewisdom.com/fff3cd_OwlOnly_128x128.png" width="32" alt="Finite Wisdom logo">
+        </a>
+    </label>
+    <input class="debug-panel-show" type="checkbox" id="debug-panel-show"/>
 
-            <div class="card">
+    <ul class="debug-panel-tabs">
 
-                <div class="card-header" style="background-color: #F49B1E;" id="debug-panel-heading-one">
-                    <h4 class="header-title">
-                        <a href="#" class="collapsed" style="color: #fff3cd;" data-toggle="collapse" data-target="#debug-panel-collapse-one" aria-expanded="true" aria-controls="debug-panel-collapse-one">
-                            <i class="">↕</i>
-                            Debug Panel
-                        </a>
-                        <!-- htmllint ignore -->
-                        <a href="https://www.finitewisdom.com" target="_blank">
-                            <img class="float-right" src="https://s3.amazonaws.com/cdn.finitewisdom.com/fff3cd_OwlOnly_128x128.png" width="32" alt="Finite Wisdom logo">
-                        </a>
-                        <!-- htmllint unignore -->
-                    </h4>
+        <%
+            Object.keys( options ).forEach( ( key, index ) => {
+                var option = options[ key ];
+                if ( option.display === true ) {
+        %>
+                    <li class="debug-panel-tab">
+                        <input type="radio" name="tabs" <%= index === 0 ? 'checked="checked"' : '' %> id="debug-panel-tab-<%= key %>" />
+                        <label for="debug-panel-tab-<%= key %>"><%= key %></label>
+                        <div id="debug-panel-tab-content-<%= key %>" class="debug-panel-tab-content">
+                            <%- formatAsTable( option.object, option.maxDepth ) %>
+                        </div>
+                    </li>
+        <%
+                }
+            } );
+        %>
+      
+        <% if ( false ) { %>
+
+            <li class="debug-panel-tab">
+                <input type="radio" name="tabs" checked="checked" id="debug-panel-tab-request" />
+                <label for="debug-panel-tab-request">request</label>
+                <div id="debug-panel-tab-content-request" class="debug-panel-tab-content">
+                    <%- formatAsTable( req, /* maxDepth */ 2 ) %>
                 </div>
+            </li>
+            
+            <li class="debug-panel-tab">
+                <input type="radio" name="tabs" id="debug-panel-tab-response" />
+                <label for="debug-panel-tab-response">response</label>   
+                <div id="debug-panel-tab-content-response" class="debug-panel-tab-content">
+                    <%- formatAsTable( req.res, /* maxDepth */ 2 ) %>
+                </div>
+            </li>
 
-                <div id="debug-panel-collapse-one" class="collapse" aria-labelledby="debug-panel-heading-one">
+            <li class="debug-panel-tab">
+                <input type="radio" name="tabs" id="debug-panel-tab-headers" />
+                <label for="debug-panel-tab-headers">headers</label>   
+                <div id="debug-panel-tab-content-headers" class="debug-panel-tab-content">
+                    <%- formatAsTable( req.headers ) %>
+                </div>
+            </li>
 
-                    <div class="card-body bg-dark text-dark">
+            <li class="debug-panel-tab">
+                <input type="radio" name="tabs" id="debug-panel-tab-query" />
+                <label for="debug-panel-tab-query">query</label>   
+                <div id="debug-panel-tab-content-query" class="debug-panel-tab-content">
+                    <%- formatAsTable( req.query ) %>
+                </div>
+            </li>
 
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="debug-panel-request-tab" data-toggle="tab" href="#debug-panel-request-content" role="tab" aria-controls="debug-panel-request-content" aria-selected="true">Request</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="debug-panel-response-tab" data-toggle="tab" href="#debug-panel-response-content" role="tab" aria-controls="debug-panel-response-content" aria-selected="true">Response</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="debug-panel-headers-tab" data-toggle="tab" href="#debug-panel-headers-content" role="tab" aria-controls="debug-panel-headers-content" aria-selected="true">Headers</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="debug-panel-query-tab" data-toggle="tab" href="#debug-panel-query-content" role="tab" aria-controls="debug-panel-query-content" aria-selected="true">Query</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="debug-panel-params-tab" data-toggle="tab" href="#debug-panel-params-content" role="tab" aria-controls="debug-panel-params-content" aria-selected="true">Params</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="debug-panel-cookies-tab" data-toggle="tab" href="#debug-panel-cookies-content" role="tab" aria-controls="debug-panel-cookies-content" aria-selected="true">Cookies</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="debug-panel-process-tab" data-toggle="tab" href="#debug-panel-process-content" role="tab" aria-controls="debug-panel-process-content" aria-selected="true">Process</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="debug-panel-app-tab" data-toggle="tab" href="#debug-panel-app-content" role="tab" aria-controls="debug-panel-app-content" aria-selected="true">App</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="debug-panel-session-tab" data-toggle="tab" href="#debug-panel-session-content" role="tab" aria-controls="debug-panel-session-content" aria-selected="true">Session</a>
-                            </li>
-                        </ul>
+            <li class="debug-panel-tab">
+                <input type="radio" name="tabs" id="debug-panel-tab-params" />
+                <label for="debug-panel-tab-params">params</label>   
+                <div id="debug-panel-tab-content-params" class="debug-panel-tab-content">
+                    <%- formatAsTable( req.params ) %>
+                </div>
+            </li>
 
-                        <div class="tab-content">
+            <li class="debug-panel-tab">
+                <input type="radio" name="tabs" id="debug-panel-tab-cookies" />
+                <label for="debug-panel-tab-cookies">cookies</label>   
+                <div id="debug-panel-tab-content-cookies" class="debug-panel-tab-content">
+                    <%- formatAsTable( req.cookies ) %>
+                </div>
+            </li>
 
-                            <div class="tab-pane fade" id="debug-panel-headers-content" role="tabpanel" aria-labelledby="debug-panel-headers-tab">
-                                <%- formatAsTable( req.headers ) %>
-                            </div>
+            <li class="debug-panel-tab">
+                <input type="radio" name="tabs" id="debug-panel-tab-process" />
+                <label for="debug-panel-tab-process">process</label>   
+                <div id="debug-panel-tab-content-process" class="debug-panel-tab-content">
+                    <%- formatAsTable( process, /* maxDepth */ 3 ) %>
+                </div>
+            </li>
 
-                            <div class="tab-pane fade" id="debug-panel-query-content" role="tabpanel" aria-labelledby="debug-panel-query-tab">
-                                <%- formatAsTable( req.query ) %>
-                            </div>
+            <li class="debug-panel-tab">
+                <input type="radio" name="tabs" id="debug-panel-tab-app" />
+                <label for="debug-panel-tab-app">app</label>   
+                <div id="debug-panel-tab-content-app" class="debug-panel-tab-content">
+                    <%- formatAsTable( req.app, /* maxDepth */ 4 ) %>
+                </div>
+            </li>
 
-                            <div class="tab-pane fade" id="debug-panel-params-content" role="tabpanel" aria-labelledby="debug-panel-params-tab">
-                                <%- formatAsTable( req.params ) %>
-                            </div>
+            <li class="debug-panel-tab">
+                <input type="radio" name="tabs" id="debug-panel-tab-session" />
+                <label for="debug-panel-tab-session">session</label>   
+                <div id="debug-panel-tab-content-session" class="debug-panel-tab-content">
+                    <%- formatAsTable( req.session, /* maxDepth */ 3 ) %>
+                </div>
+            </li>
 
-                            <div class="tab-pane fade" id="debug-panel-cookies-content" role="tabpanel" aria-labelledby="debug-panel-cookies-tab">
-                                <%- formatAsTable( req.cookies ) %>
-                            </div>
+        <% } %>
+                
+    </ul><!-- debug-panel-tabs -->  
 
-                            <div class="tab-pane fade" id="debug-panel-app-content" role="tabpanel" aria-labelledby="debug-panel-app-tab">
-                                <% console.log( "req.app" ); %>
-                                <%- formatAsTable( req.app, /* maxDepth */ 3 ) %>
-                            </div>
-
-                            <div class="tab-pane fade" id="debug-panel-session-content" role="tabpanel" aria-labelledby="debug-panel-session-tab">
-                                <%- formatAsTable( req.session, /* maxDepth */ 2 ) %>
-                            </div>
-
-                            <div class="tab-pane fade show active" id="debug-panel-request-content" role="tabpanel" aria-labelledby="debug-panel-request-tab">
-                                <%- formatAsTable( req, /* maxDepth */ 1 ) %>
-                            </div>
-
-                            <div class="tab-pane fade" id="debug-panel-response-content" role="tabpanel" aria-labelledby="debug-panel-response-tab">
-                                <%- formatAsTable( req.res, /* maxDepth */ 1 ) %>
-                            </div>
-
-                            <div class="tab-pane fade" id="debug-panel-process-content" role="tabpanel" aria-labelledby="debug-panel-process-tab">
-                                <%- formatAsTable( process, /* maxDepth */ 2 ) %>
-                            </div>
-
-                        </div> <!-- tab-content -->
-
-                    </div> <!-- card-body -->
-
-                </div> <!-- collapse -->
-
-            </div> <!-- card -->
-
-        </div> <!-- accordion -->
-
-    </div> <!-- col-12 -->
-</div> <!-- row -->
+</div><!-- debug-panel -->
