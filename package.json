@@ -1,6 +1,6 @@
 {
     "name": "express-debug-panel",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "A panel containing useful debugging information, for use in Express.js applications",
     "main": "index.js",
     "scripts": {
