@@ -60,15 +60,17 @@ function render( req, options, callback ) {
 
     return new Promise( ( resolve, reject ) => {
         if ( !req ) {
-            reject( "Specify a request object" );
-            return callback( "Specify a request object" );
+            reject( new Error( "Specify a request object" ) );
+            callback( "Specify a request object" );
+            return;
         } else if ( typeof req !== "object" ) {
-            reject( "Request is not an object" );
-            return callback( "Request is not an object" );
+            reject( new Error( "Request is not an object" ) );
+            callback( "Request is not an object" );
+            return;
         } else {
             ejs.renderFile( template, { "options": myOptions }, null, function( err, str ) {
                 if ( err ) {
-                    reject( "Error: " + err.name + " - " + err.message );
+                    reject( err );
                     callback( "Error: " + err.name + " - " + err.message );
                     return;
                 } else {
@@ -78,10 +80,11 @@ function render( req, options, callback ) {
                 }
             } );
         }
+        return;
     } );
 }
 
-var ExpressDebugPanel = function () {
+function ExpressDebugPanel() {
     this.render = render;
 }
 

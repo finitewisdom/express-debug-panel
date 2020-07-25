@@ -1,0 +1,103 @@
+.debug-panel,
+.debug-panel * {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
+
+.debug-panel {
+  background: #303030;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 13px;
+  line-height: 1.15;
+  width: 100%; }
+
+.debug-panel-show-label {
+  background-color: #f49b1e;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 0;
+  padding: 16px 28px;
+  width: 100%; }
+  .debug-panel-show-label img {
+    float: right; }
+
+.debug-panel-show {
+  display: none; }
+  .debug-panel-show + .debug-panel-tabs {
+    display: none; }
+  .debug-panel-show:checked + .debug-panel-tabs {
+    display: block; }
+
+.debug-panel-empty {
+  padding: 20px;
+  background-color: #eee; }
+
+.debug-panel-tabs {
+  background: #303030;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+  display: block;
+  margin: 24px 0;
+  min-height: 50px;
+  padding-left: 25px;
+  position: relative;
+  width: 100%; }
+  .debug-panel-tabs .debug-panel-tab {
+    display: block;
+    float: left; }
+    .debug-panel-tabs .debug-panel-tab > input[type="radio"] {
+      display: none; }
+    .debug-panel-tabs .debug-panel-tab > label {
+      background: #303030;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      display: block;
+      font-size: 15px;
+      padding: 15px 21px;
+      position: relative; }
+    .debug-panel-tabs .debug-panel-tab > [id^="debug-panel-tab"]:checked + label {
+      border-bottom: 2px solid #fff;
+      color: #fff;
+      top: 0; }
+    .debug-panel-tabs .debug-panel-tab > [id^="debug-panel-tab"]:checked ~ [id^="debug-panel-tab-content"] {
+      display: block;
+      -webkit-transition: display 400ms ease-out;
+      transition: display 400ms ease-out;
+      z-index: 1; }
+  .debug-panel-tabs .debug-panel-tab-content {
+    background: #303030;
+    color: #000;
+    display: none;
+    left: 0;
+    margin-bottom: 32px;
+    overflow: hidden;
+    padding: 25px;
+    position: absolute;
+    top: 50px;
+    -webkit-transition: display 400ms ease-out;
+    transition: display 400ms ease-out;
+    width: 100%;
+    z-index: 0; }
+
+.debug-panel-table {
+  background-color: #eee;
+  border-collapse: collapse;
+  width: 100%; }
+  .debug-panel-table tbody tr:nth-of-type(even) {
+    background-color: #fff; }
+  .debug-panel-table th,
+  .debug-panel-table td {
+    border: 1px solid #ccc;
+    padding: 13px 20px; }
+  .debug-panel-table th {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.06);
+    color: #fff; }
+  .debug-panel-table td pre {
+    margin: 0;
+    white-space: pre-wrap; }
+
+.debug-panel-table-header-name {
+  width: 25%; }

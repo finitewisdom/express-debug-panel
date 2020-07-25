@@ -1,0 +1,230 @@
+{
+    "parser": "espree",
+    "parserOptions": {
+        "ecmaVersion": 2018
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+    
+        //  possible errors (https://eslint.org/docs/rules/#possible-errors)
+        "for-direction": "error",
+        "getter-return": "error",
+        "no-await-in-loop": "error",
+        "no-console": "off",                // allowed
+        "no-extra-parens": "off",           // allowed
+        "no-prototype-builtins": "off",     // allowed
+        "no-template-curly-in-string": "error",
+        "valid-jsdoc": [ "error", { "requireReturn": false } ],
+
+        //  best practices (https://eslint.org/docs/rules/#best-practices)
+        "accessor-pairs": "error",
+        "array-callback-return": "error",
+        "block-scoped-var": "error",
+        "class-methods-use-this": "off",    // allowed
+        "consistent-return": "error",
+        "curly": "error",
+        "default-case": "error",
+        "dot-location": [ "error", "property" ],
+        "dot-notation": "error",
+        "eqeqeq": "error",
+        "guard-for-in": "error",
+        "no-alert": "error",
+        "no-caller": "error",
+        "no-div-regex": "error",
+        "no-else-return": "off",            // allowed
+        "no-empty-function": "off",
+        "no-eq-null": "error",
+        "no-eval": "error",
+        "no-extend-native": "error",
+        "no-extra-bind": "error",
+        "no-extra-label": "error",
+        "no-floating-decimal": "error",
+        "no-implicit-coercion": "error",
+        "no-implicit-globals": "error",
+        "no-implied-eval": "error",
+        "no-invalid-this": "error",
+        "no-iterator": "error",
+        "no-labels": "error",
+        "no-lone-blocks": "error",
+        "no-loop-func": "error",
+        "no-magic-numbers": "off",          // allowed
+        "no-multi-spaces": [ "error", { "ignoreEOLComments": true } ],
+        "no-multi-str": "error",
+        "no-new": "error",
+        "no-new-func": "error",
+        "no-new-wrappers": "error",
+        "no-octal-escape": "error",
+        "no-param-reassign": "error",
+        "no-proto": "error",
+        "no-restricted-properties": "error",
+        "no-return-assign": "error",
+        "no-return-await": "error",
+        "no-script-url": "error",
+        "no-self-compare": "error",
+        "no-sequences": "error",
+        "no-throw-literal": "error",
+        "no-unmodified-loop-condition": "error",
+        "no-unused-expressions": "error",
+        "no-useless-call": "error",
+        "no-useless-concat": "error",
+        "no-useless-escape": "off",
+        "no-useless-return": "off",
+        "no-void": "error",
+        "no-warning-comments": [ "error", { "terms": [ "todo", "fixme", "any other term" ], "location": "anywhere" } ],
+        "no-with": "error",
+        "prefer-promise-reject-errors": "error",
+        "radix": "error",
+        "require-await": "error",
+        "vars-on-top": "error",
+        "wrap-iife": [ "error", "outside" ],
+        "yoda": "error",
+
+        //  variables (http://eslint.org/docs/rules/#variables)
+        "no-catch-shadow": "error",                   //  disallow the catch clause parameter name being the same as a variable in the outer scope
+        "no-delete-var": "error",                     //  disallow deletion of variables (recommended)
+        "no-label-var": "error",                      //  disallow labels that share a name with a variable
+        "no-shadow": [ "error", { "builtinGlobals": true } ], //  disallow declaration of variables already declared in the outer scope
+        "no-shadow-restricted-names": "error",        //  disallow shadowing of names such as arguments
+        "no-undef": "error",                          //  disallow use of undeclared variables unless mentioned in a global block (recommended)
+        "no-undef-init": "error",                     //  disallow use of undefined when initializing variables
+        "no-unused-vars": [ "error", { "vars": "all", "varsIgnorePattern": "[iI]gnore" } ], //  disallow declaration of variables that are not used in the code (recommended)
+        "no-use-before-define": ["error", "nofunc"],  //  disallow use of variables before they are defined
+
+        //  node.js (http://eslint.org/docs/rules/#nodejs-and-commonjs)
+        "callback-return": "error",                   //  enforce return after a callback
+        "global-require": "off",                      //  enforce require() on top-level module scope
+        "handle-callback-err": "error",               //  enforce error handling in callbacks
+        "no-buffer-constructor": "error",             //  disallow use of the Buffer() constructor
+        "no-mixed-requires": "off",                   //  disallow mixing regular variable and require declarations
+        "no-new-require": "error",                    //  disallow use of new operator with the require function
+        "no-path-concat": "error",                    //  disallow string concatenation with __dirname and __filename
+        "no-process-env": "off",                      //  disallow the use of process.env
+        "no-process-exit": "error",                   //  disallow process.exit()
+        "no-restricted-modules": "off",               //  restrict usage of specified node modules
+        "no-sync": "off",                             //  disallow use of synchronous methods
+
+        //  stylistic issues (http://eslint.org/docs/rules/#stylistic-issues)
+        "array-bracket-newline": "off",                                     //  enforce linebreaks after opening and before closing array brackets
+        "array-bracket-spacing": [ "error", "always" ],                     //  enforce spacing inside array brackets (fixable)
+        "array-element-newline": "off",                                     //  enforce line breaks after each array element
+        "block-spacing": [ "error", "always" ],                             //  disallow or enforce spaces inside of single line blocks (fixable)
+        "brace-style": [ "error", "1tbs", { "allowSingleLine": true } ],    //  enforce one true brace style
+        "camelcase": "error",                                               //  require camel case names
+        "capitalized-comments": "off",                                      //  enforce or disallow capitalization of the first letter of a comment
+        "comma-dangle": [ "error", "only-multiline" ],                      //  require or disallow trailing commas
+        "comma-spacing": "error",                                           //  enforce spacing before and after comma (fixable)
+        "comma-style": "error",                                             //  enforce one true comma style
+        "computed-property-spacing": ["error", "always"],                   //  require or disallow padding inside computed properties (fixable)
+        "consistent-this": ["error", "that"],                               //  enforce consistent naming when capturing the current execution context
+        "eol-last": "error",                                                //  enforce newline at the end of file, with no multiple empty lines (fixable)
+        "func-call-spacing": "error",                                       //  require or disallow spacing between function identifiers and their invocations
+        "func-name-matching": "off",                                        //  require function names to match the name of the variable or property to which they are assigned
+        "func-names": "off",                                                //  require function expressions to have a name
+        "func-style": [ "error", "declaration", { "allowArrowFunctions": true } ],  //  enforce use of function declarations or expressions
+        "function-paren-newline": "off",                                    //  enforce consistent line breaks inside function parentheses
+        "id-length": "off",                                                 //  this option enforces minimum and maximum identifier lengths (variable names, property names etc.)
+        "id-match": "off",                                                  //  require identifiers to match the provided regular expression
+        "implicit-arrow-linebreak": ["error", "beside"],                    //  enforce the location of arrow function bodies
+        "indent": [                                                         //  specify tab or space width for your code (fixable)
+            "error",
+            4,
+            {
+                "SwitchCase": 1,                                            //  enforce indentation level for case clauses in switch statements
+                "CallExpression": {                                         //  takes an object to define rules for function call expressions
+                    "arguments": "first"                                    //  all arguments of the expression must be aligned with the first argument
+                }
+            }
+        ],                       
+        "jsx-quotes": [ "error", "prefer-double" ],                         //  specify whether double or single quotes should be used in JSX attributes
+        "key-spacing": "error",                                             //  enforce spacing between keys and values in object literal properties
+        "keyword-spacing": "error",                                         //  enforce consistent spacing before and after keywords
+        "linebreak-style": [ "error", "windows" ],                          //  disallow mixed 'LF' and 'CRLF' as linebreaks
+        "line-comment-position": "off",                                     //  enforce position of line comments
+        "lines-around-comment": ["error", {                                 //  enforce empty lines around comments
+            "beforeBlockComment": true,
+            "afterBlockComment": false,
+            "beforeLineComment": true,
+            "afterLineComment": false
+        } ],
+        "lines-between-class-members": "error",                         //  require or disallow an empty line between class members
+        "max-depth": [ "error", 6 ],                                    //  enforce a maximum depth that blocks can be nested
+        "max-len": "off",                                               //  enforce a maximum line length
+        "max-lines": "off",                                             //  enforce a maximum number of lines per file
+        "max-nested-callbacks": 2,                                      //  specify the maximum depth callbacks can be nested
+        "max-params": [ "error", 12 ],                                  //  enforce a maximum number of parameters in function definitions
+        "max-statements": "off",                                        //  enforce a maximum number of statements allowed in function blocks
+        "max-statements-per-line": "off",                               //  enforce a maximum number of statements allowed per line
+        "multiline-comment-style": "off",                               //  enforce a particular style for multiline comments
+        "multiline-ternary": [ "error", "always-multiline" ],           //  Enforce or disallow newlines between operands of ternary expressions
+        "new-cap": "error",                                             //  require a capital letter for constructors
+        "new-parens": "error",                                          //  disallow the omission of parentheses when invoking a constructor with no arguments
+        "newline-after-var": "error",                                   //  require or disallow an empty newline after variable declarations
+        "no-array-constructor": "error",                                //  disallow use of the Array constructor
+        "no-bitwise": "off",                                            //  disallow bitwise operators
+        "no-continue": "error",                                         //  disallow use of the continue statement
+        "no-inline-comments": "off",                                    //  disallow comments inline after code
+        "no-lonely-if": "error",                                        //  disallow if as the only statement in an else block
+        "no-mixed-spaces-and-tabs": "error",                            //  disallow mixed spaces and tabs for indentation (recommended)
+        "no-multi-assign": "off",                                       //  disallow use of chained assignment expressions
+        "no-multiple-empty-lines": ["error", { "max": 2 } ],            //  disallow multiple empty lines
+        "no-negated-condition": "off",                                  //  disallow negated conditions
+        "no-nested-ternary": "error",                                   //  disallow nested ternary expressions
+        "no-new-object": "error",                                       //  disallow the use of the Object constructor
+        "no-plusplus": "error",                                         //  disallow the unary operators ++ and --
+        "no-restricted-syntax": "off",                                  //  disallow use of certain syntax in code
+        "no-spaced-func": "error",                                      //  disallow space between function identifier and application (fixable)
+        "no-ternary": "off",                                            //  disallow the use of ternary operators
+        "no-trailing-spaces": [ "off", { "skipBlankLines": true } ],    //  disallow trailing whitespace at the end of lines (fixable)
+        "no-underscore-dangle": "off",                                  //  disallow dangling underscores in identifiers
+        "no-unneeded-ternary": "error",                                 //  disallow the use of ternary operators when a simpler alternative exists
+        "no-whitespace-before-property": "error",                       //  disallow whitespace before properties
+        "object-curly-newline": "off",                                  //  enforce consistent line breaks inside braces
+        "object-curly-spacing": [ "error", "always" ],                  //  require or disallow padding inside curly braces (fixable)
+        "one-var": [ "error", "always" ],                               //  require or disallow one variable declaration per function
+        "operator-assignment": "off",                                   //  require assignment operator shorthand where possible or prohibit it entirely
+        "operator-linebreak": [ "error", "before" ],                    //  enforce operators to be placed before or after line breaks
+        "padded-blocks": "off",                                         //  enforce padding within blocks
+        "quote-props": "error",                                         //  require quotes around object literal property names
+        "quotes": [ "error", "double", "avoid-escape" ],                //  specify whether backticks, double or single quotes should be used (fixable)
+        "semi-spacing": "error",                                        //  enforce spacing before and after semicolons
+        "semi": "error",                                                //  require or disallow use of semicolons instead of ASI (fixable)
+        "semi-style": [ "error", "last" ],                              //  enforce location of semicolons
+        "sort-vars": "off",                                             //  sort variables within the same declaration block
+        "space-before-blocks": "error",                                 //  require or disallow a space before blocks (fixable)
+        "space-before-function-paren": [ "error", "never" ],            //  require or disallow a space before function opening parenthesis (fixable)
+        "space-in-parens": ["error", "always"],                         //  require or disallow spaces inside parentheses
+        "space-infix-ops": "error",                                     //  require spaces around operators (fixable)
+        "space-unary-ops": "error",                                     //  require or disallow spaces before/after unary operators (fixable)
+        "spaced-comment": [ "error", "always", {                        //  require or disallow a space immediately following the // or /* in a comment
+            "block": {
+                "exceptions": [ "*" ]
+            }
+        } ],
+        "switch-colon-spacing": "error",                                //  enforce spacing around colons of switch statements
+        "template-tag-spacing": [ "error", "never" ],                   //  require or disallow spacing between template tags and their literals
+        "unicode-bom": [ "error", "never" ],                            //  require or disallow Unicode byte order mark (BOM)
+        "wrap-regex": "off",                                            //  require regex literals to be wrapped in parentheses
+
+        //  ECMAScript 6 (https://eslint.org/docs/rules/#ecmascript-6)
+        "arrow-body-style": [ "error", "always" ],                                  //  require braces around arrow function bodies
+        "arrow-parens": [ "error", "as-needed" ],                                   //  require parentheses around arrow function arguments
+        "arrow-spacing": [ "error", { "before": true, "after": true } ],            //  enforce consistent spacing before and after the arrow in arrow functions
+        "generator-star-spacing": [ "error", { "before": false, "after": true} ],   //  enforce consistent spacing around * operators in generator functions
+        "no-confusing-arrow": [ "error", { "allowParens": true } ],                 //  disallow arrow functions where they could be confused with comparisons
+        "no-duplicate-imports": "off",                                              //  disallow duplicate module imports
+        "no-useless-computed-key": "error",                                         //  disallow unnecessary computed property keys in object literals
+        "no-useless-constructor": "off",                                            //  disallow unnecessary constructors
+        "no-useless-rename": "error",                                               //  disallow renaming import, export, and destructured assignments to the same name
+        "object-shorthand": [ "error", "consistent-as-needed" ],                    //  require or disallow method and property shorthand syntax for object literals
+        "prefer-const": "error",                                                    //  require const declarations for variables that are never reassigned after declared
+        "prefer-destructuring": "off",                                              //  require destructuring from arrays and/or objects
+        "prefer-numeric-literals": "error",                                         //  disallow parseInt() and Number.parseInt() in favor of binary, octal, and hexadecimal literals
+        "prefer-rest-params": "error",                                              //  require rest parameters instead of arguments
+        "prefer-spread": "error",                                                   //  require spread operators instead of .apply()
+        "rest-spread-spacing": "error",                                             //  enforce spacing between rest and spread operators and their expressions
+        "sort-imports": "off",                                                      //  enforce sorted import declarations within modules
+        "symbol-description": "error",                                              //  require symbol descriptions
+        "template-curly-spacing": [ "error", "always" ],                            //  require or disallow spacing around embedded expressions of template strings
+        "yield-star-spacing": [ "error", { "before": false, "after": true} ]        //  require or disallow spacing around the * in yield* expression
+    }
+}

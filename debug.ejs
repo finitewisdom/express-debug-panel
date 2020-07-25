@@ -49,6 +49,8 @@
                         } else {
                             s += "(Object)";
                         }
+                    } else if ( obj[ key ] && typeof obj[ key ] === "function" ) {
+                        s += "<pre>" + escapeHtml( obj[ key ] ) + "</pre";
                     } else {
                         s += escapeHtml( obj[ key ] );
                     }
@@ -67,147 +69,21 @@
 
 %>
 
+<!-- htmllint ignore -->
 <style>
-
-    .debug-panel,
-    .debug-panel * {
-        box-sizing: border-box;        
-    }
-
-    .debug-panel {
-        background: #303030;
-        font-family: "Trebuchet MS", sans-serif;
-        font-size: 13px;
-        line-height: 1.15;
-        width: 100%;
-    }
-
-    .debug-panel-show-label {
-        background-color: #F49B1E;
-        color: rgba(255,255,255,.85);
-        cursor: pointer;
-        display: block;
-        font-size: 20px;
-        font-weight: 600;
-        margin-bottom: 0;
-        padding: 16px 28px;
-        width: 100%;
-    }
-
-    .debug-panel-show-label img {
-        float: right;
-    }
-
-    .debug-panel-show {
-        display: none;
-    }
-
-    .debug-panel-show + .debug-panel-tabs {
-        display: none;
-    }
-
-    .debug-panel-show:checked + .debug-panel-tabs {
-        display: block;
-    }
-
-    .debug-panel-empty {
-        padding: 20px;
-        background-color: #eee;
-    }
-
-    .debug-panel-tabs{
-        background: #303030;
-        border-bottom: 2px solid rgba(255,255,255,0.08);
-        display: block;
-        margin: 24px 0px;
-        min-height: 50px;
-        padding-left: 25px;
-        position: relative;
-        width: 100%;
-    }
-
-    .debug-panel-tabs .debug-panel-tab {
-        display: block;
-        float: left;
-    }
-
-    .debug-panel-tabs .debug-panel-tab > input[type="radio"] {
-        display: none;
-    }
-
-    .debug-panel-tabs .debug-panel-tab>label {
-        background: #303030;
-        border-bottom: 2px solid rgba(255,255,255,0.08);
-        color: rgba(255,255,255,.5);
-        cursor: pointer;
-        display: block;
-        font-size: 15px;
-        padding: 15px 21px;
-        position: relative;
-    }
-
-    .debug-panel-tabs .debug-panel-tab-content {
-        background: #303030;
-        color: black;
-        display: none;
-        left: 0;
-        margin-bottom: 32px;
-        overflow: hidden;
-        padding: 25px;
-        position: absolute;
-        top: 50px;
-        transition: display 400ms ease-out;
-        width: 100%;
-        z-index: 0; /* or display: none; */
-    }
-
-    .debug-panel-tabs>.debug-panel-tab>[id^="debug-panel-tab"]:checked + label {
-        border-bottom: 2px solid white;
-        color: white;
-        top: 0;
-    }
-
-    .debug-panel-tabs > .debug-panel-tab > [id^="debug-panel-tab"]:checked ~ [id^="debug-panel-tab-content"] {
-        display: block;
-        transition: display 400ms ease-out;
-        z-index: 1; /* or display: block; */
-    }
-
-    .debug-panel-table {
-        background-color: #eee;
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    .debug-panel-table tbody tr:nth-of-type(even) {
-        background-color: white;
-    }
-
-    .debug-panel-table th,
-    .debug-panel-table td {
-        border: 1px solid #ccc;
-        padding: 13px 20px 13px 20px;
-    }
-
-    .debug-panel-table th {
-        background-color: rgba(0,0,0,.4);
-        border-color: rgba(255,255,255,.06);
-        color: #fff;
-    }
-
-    .debug-panel-table-header-name {
-        width: 25%;
-    }
-
+<%- include ( "debug.css" ) %>
 </style>
+<!-- htmllint unignore -->
 
 <div class="debug-panel">
 
     <label class="debug-panel-show-label" for="debug-panel-show">
         ↧ Debug Panel
+        <!-- htmllint ignore -->
         <a href="https://www.finitewisdom.com" target="_blank">
             <img src="https://s3.amazonaws.com/cdn.finitewisdom.com/fff3cd_OwlOnly_128x128.png" width="32" alt="Finite Wisdom logo">
         </a>
+        <!-- htmllint unignore -->
     </label>
     <input class="debug-panel-show" type="checkbox" id="debug-panel-show"/>
 
@@ -229,7 +105,7 @@
                 }
             } );
         %>
-      
+
         <% if ( false ) { %>
 
             <li class="debug-panel-tab">

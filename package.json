@@ -1,16 +1,44 @@
 {
-  "name": "express-debug-panel",
-  "version": "1.0.1",
-  "description": "A panel containing useful debugging information, for use in Express.js applications",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "Joshua Golub <j@wiz4.us>",
-  "license": "ISC",
-  "dependencies": {
-    "config": "^3.3.1",
-    "ejs": "^3.1.3"
-  }
+    "name": "express-debug-panel",
+    "version": "1.0.1",
+    "description": "A panel containing useful debugging information, for use in Express.js applications",
+    "main": "index.js",
+    "scripts": {
+        "test": "mocha"
+    },
+    "keywords": [
+        "debug",
+        "express"
+    ],
+    "author": "Joshua Golub <j@wiz4.us> (https://www.finitewisdom.com/)",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/finitewisdom/express-debug-panel.git"
+    },
+    "bugs": {
+        "url": "https://github.com/finitewisdom/express-debug-panel/issues"
+    },
+    "homepage": "https://github.com/finitewisdom/express-debug-panel",
+    "dependencies": {
+        "config": "^3.3.1",
+        "ejs": "^3.1.3"
+    },
+    "devDependencies": {
+        "gulp": "^4.0.2",
+        "gulp-autoprefixer": "^7.0.1",
+        "gulp-clean": "^0.4.0",
+        "gulp-clean-css": "^4.3.0",
+        "gulp-eslint": "^6.0.0",
+        "gulp-jsonlint": "^1.3.2",
+        "gulp-rename": "^2.0.0",
+        "gulp-replace": "^1.0.0",
+        "gulp-sass": "^4.1.0",
+        "gulp-sass-lint": "^1.4.0",
+        "gulp-tap": "^2.0.0",
+        "gulp-w3c-html-validator": "^2.0.1",
+        "gulplog": "^1.0.0",
+        "htmllint": "^0.8.0",
+        "mocha": "^8.0.1"
+    }
 }
