@@ -28,6 +28,10 @@ suppressed the *process* object and replaced it with *env*, *config*, and *versi
 
 ![alt text](./images/opened-custom-config.png)
 
+## Demonstration
+
+See a live demonstration of the **Debug Panel** at [demo.finitewisdom.com](https://demo.finitewisdom.com/express-debug-panel).
+
 ## Installation
 
     $ npm install express-debug-panel
