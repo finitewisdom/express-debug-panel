@@ -3,7 +3,6 @@
 A panel containing useful debugging information, for use in Express.js applications.
 
 [![Build Status](https://travis-ci.org/finitewisdom/express-debug-panel.png?branch=master)](https://travis-ci.org/finitewisdom/express-debug-panel)
-[![Dependencies status](https://david-dm.org/finitewisdom/express-debug-panel.svg)](https://david-dm.org/finitewisdom/express-debug-panel)
 [![Known Vulnerabilities](https://snyk.io/test/github/finitewisdom/express-debug-panel/badge.svg?targetFile=package.json)](https://snyk.io/test/github/finitewisdom/express-debug-panel?targetFile=package.json)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ac692051da995e3c21b4/maintainability)](https://codeclimate.com/github/finitewisdom/express-debug-panel/maintainability)
 [![Inline docs](http://inch-ci.org/github/finitewisdom/express-debug-panel.svg?branch=master)](http://inch-ci.org/github/finitewisdom/express-debug-panel)
